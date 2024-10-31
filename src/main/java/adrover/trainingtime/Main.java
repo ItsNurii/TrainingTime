@@ -4,6 +4,11 @@
  */
 package adrover.trainingtime;
 
+import adrover.trainingtime.dataaccess.DataAccess;
+import adrover.trainingtime.dtos.Usuari;
+import at.favre.lib.crypto.bcrypt.BCrypt;
+import java.util.ArrayList;
+
 /**
  *
  * @author nuria
@@ -26,21 +31,58 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jButtonAccess = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setFocusTraversalPolicyProvider(true);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/TrainingTime logo (1).png"))); // NOI18N
+        jLabel1.setText("Logo");
+        jLabel1.setMaximumSize(new java.awt.Dimension(120, 120));
+        jLabel1.setMinimumSize(new java.awt.Dimension(120, 120));
+        jLabel1.setPreferredSize(new java.awt.Dimension(120, 120));
+
+        jButtonAccess.setText("Access");
+        jButtonAccess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAccessActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(267, 267, 267)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(371, 371, 371)
+                        .addComponent(jButtonAccess, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(jButtonAccess, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(124, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("jLabelLogo\n");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonAccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccessActionPerformed
+        LoginDialog loginDialog= new LoginDialog(this,true);
+        loginDialog.setVisible(true);
+    }//GEN-LAST:event_jButtonAccessActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +120,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAccess;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

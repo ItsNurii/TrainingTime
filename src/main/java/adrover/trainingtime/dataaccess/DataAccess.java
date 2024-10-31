@@ -1,0 +1,85 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package adrover.trainingtime.dataaccess;
+
+import adrover.trainingtime.dtos.Usuari;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author nuria
+ */
+public class DataAccess {
+    private Connection getConnection(){
+        Connection connection = null;
+        String connectionString = "jdbc:sqlserver://localhost;database=simulabdb;user=sa;" + "password=152110;encrypt=false;";
+        try {
+            connection= DriverManager.getConnection(connectionString);
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return connection;
+    }
+    
+    public Usuari getUsuari(String Email){
+       Usuari user= null;
+        String sql= "SELECT * FROM Usuaris WHERE Email=?";
+        
+        Connection connection= getConnection();
+        try {
+            PreparedStatement selectStatement= connection.prepareStatement(sql);
+            selectStatement.setString(1, Email);
+            ResultSet resultSet= selectStatement.executeQuery();
+            while(resultSet.next()){
+                user= new Usuari();
+                user.setId(resultSet.getInt("Id"));
+                user.setNom(resultSet.getString("Nom"));
+                user.setEmail(resultSet.getString("Email"));
+                user.setPasswordHash(resultSet.getString("PasswordHash"));
+                user.setFoto(resultSet.getBytes("Foto"));
+                user.setInstructor(resultSet.getBoolean("Instructor"));
+            }
+            
+            selectStatement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+        return user;
+    }
+    
+   public int registerUser(Usuari u){
+       int newUserId= 0;
+       Connection connection= getConnection();
+       String sql= "INSERT INTO Usuaris(Nom, Email, PasswordHash, Instructor)" + "VALUES(?,?,?,?)";
+       
+        try {
+            PreparedStatement insertStatement= connection.prepareStatement(sql);
+            insertStatement.setString(1, u.getNom());
+            insertStatement.setString(2, u.getEmail());
+            insertStatement.setString(3, u.getPasswordHash());
+            insertStatement.setBoolean(4, u.isInstructor());
+            newUserId= insertStatement.executeUpdate();
+            
+            insertStatement.close();;
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return newUserId;
+       
+   }
+   
+}
