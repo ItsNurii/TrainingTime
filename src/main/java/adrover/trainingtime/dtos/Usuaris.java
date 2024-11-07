@@ -8,13 +8,18 @@ package adrover.trainingtime.dtos;
  *
  * @author nuria
  */
-public class Usuari {
+public class Usuaris {
     private int id;
     private String nom;
     private String email;
     private String passwordHash;
     private byte[] foto;
     private boolean instructor;
+    
+    @Override
+    public String toString(){
+        return id + " " + nom + " " + email;
+    }
     
     public int getId() {
         return id;

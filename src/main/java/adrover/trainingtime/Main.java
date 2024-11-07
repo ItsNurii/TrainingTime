@@ -4,10 +4,10 @@
  */
 package adrover.trainingtime;
 
-import adrover.trainingtime.dataaccess.DataAccess;
-import adrover.trainingtime.dtos.Usuari;
-import at.favre.lib.crypto.bcrypt.BCrypt;
-import java.util.ArrayList;
+import adrover.trainingtime.dtos.Usuaris;
+import java.awt.Desktop;
+import java.net.URI;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,12 +15,41 @@ import java.util.ArrayList;
  */
 public class Main extends javax.swing.JFrame {
 
+    private ListUsers userList;
+    private Usuaris instructor;
+
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+       
+        this.instructor = new Usuaris(); // Cambiar por el instructor real después del login
+        
+        // Crear el panel ListUsers y pasarlo al marco
+        userList = new ListUsers(this, instructor);
+        userList.setVisible(false); // No lo mostramos al principio
+        
+        getContentPane().add(userList);
+        userList.setBounds(0, 0, 800, 600); // Definir las posiciones y tamaños manualmente
+
     }
+
+    public void showListUsers() {
+        // Asegurarse de que el panel de usuarios esté visible
+        userList.setVisible(true);
+
+        // Eliminar cualquier componente anterior
+        getContentPane().removeAll();
+
+        // Agregar el panel de usuarios
+        getContentPane().add(userList);
+
+        // Volver a validar y repintar la ventana
+        revalidate();
+        repaint();
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,15 +62,26 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButtonAccess = new javax.swing.JButton();
+        jLabelWeb = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemExit = new javax.swing.JMenuItem();
+        jMenuHelp = new javax.swing.JMenu();
+        jMenuItemAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusTraversalPolicyProvider(true);
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/TrainingTime logo (1).png"))); // NOI18N
         jLabel1.setText("Logo");
         jLabel1.setMaximumSize(new java.awt.Dimension(120, 120));
         jLabel1.setMinimumSize(new java.awt.Dimension(120, 120));
         jLabel1.setPreferredSize(new java.awt.Dimension(120, 120));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(267, 38, 329, 331);
 
         jButtonAccess.setText("Access");
         jButtonAccess.addActionListener(new java.awt.event.ActionListener() {
@@ -49,30 +89,43 @@ public class Main extends javax.swing.JFrame {
                 jButtonAccessActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonAccess);
+        jButtonAccess.setBounds(371, 421, 115, 39);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(267, 267, 267)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(371, 371, 371)
-                        .addComponent(jButtonAccess, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(285, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jButtonAccess, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
-        );
+        jLabelWeb.setText("Visit our website for more information");
+        jLabelWeb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelWebMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabelWeb);
+        jLabelWeb.setBounds(320, 500, 220, 16);
+
+        jMenu1.setText("File");
+
+        jMenuItemExit.setText("Exit");
+        jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemExit);
+
+        jMenuHelp.setText("Help");
+
+        jMenuItemAbout.setText("About");
+        jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAboutActionPerformed(evt);
+            }
+        });
+        jMenuHelp.add(jMenuItemAbout);
+
+        jMenu1.add(jMenuHelp);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         getAccessibleContext().setAccessibleName("jLabelLogo\n");
 
@@ -80,9 +133,42 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccessActionPerformed
-        LoginDialog loginDialog= new LoginDialog(this,true);
+         // Lógica para el login
+        LoginDialog loginDialog = new LoginDialog(this, true, this);
         loginDialog.setVisible(true);
+
+        Usuaris getloggedUser = loginDialog.getloggedUser();
+        if (getloggedUser != null) {
+            // Si el login fue exitoso, mostrar la lista de usuarios
+            this.instructor = getloggedUser; // Guardamos el instructor logueado
+            showListUsers(); // Mostrar el panel de usuarios
+        }
+
     }//GEN-LAST:event_jButtonAccessActionPerformed
+
+    private void jLabelWebMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelWebMouseClicked
+        try {
+            String url = "www.trainingtimeweb.com";
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exceptions appropriately
+            JOptionPane.showMessageDialog(this, "Failed to open the webpage.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jLabelWebMouseClicked
+
+    private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
+
+         System.exit(0); // Exit the application
+    }//GEN-LAST:event_jMenuItemExitActionPerformed
+
+    private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
+       JOptionPane.showMessageDialog(this,
+            "Developed by Nuria Adrover\n" +
+            "Course: 2º DAM \n" +
+            "Resources used:\n" +
+            "- Logo: Krea IA\n" +
+            "- Other resources: Teatcher, classmates, ChatGPT");
+    }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,5 +208,11 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAccess;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelWeb;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuHelp;
+    private javax.swing.JMenuItem jMenuItemAbout;
+    private javax.swing.JMenuItem jMenuItemExit;
     // End of variables declaration//GEN-END:variables
 }

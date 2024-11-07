@@ -5,9 +5,8 @@
 package adrover.trainingtime;
 
 import adrover.trainingtime.dataaccess.DataAccess;
-import adrover.trainingtime.dtos.Usuari;
+import adrover.trainingtime.dtos.Usuaris;
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,12 +15,20 @@ import javax.swing.JOptionPane;
  */
 public class LoginDialog extends javax.swing.JDialog {
 
+    private Main jFrame;
+    private Usuaris loggedUser;
+
     /**
      * Creates new form LoginDialog
      */
-    public LoginDialog(java.awt.Frame parent, boolean modal) {
+    public LoginDialog(java.awt.Frame parent, boolean modal, Main mainFrame) {
         super(parent, modal);
         initComponents();
+        this.jFrame = (Main) mainFrame; // Asignar la referencia de Main
+    }
+
+    public Usuaris getloggedUser() {
+        return this.loggedUser;
     }
 
     /**
@@ -37,16 +44,18 @@ public class LoginDialog extends javax.swing.JDialog {
         jTextFieldEmailLogin = new javax.swing.JTextField();
         jButtonLogin = new javax.swing.JButton();
         jPasswordFieldPasswordLogin = new javax.swing.JPasswordField();
-        jCheckBoxInstructor = new javax.swing.JCheckBox();
         jLabelMessageSuccess = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButtonLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
 
         jPanelLogin.setBorder(javax.swing.BorderFactory.createTitledBorder("Login"));
 
+        jTextFieldEmailLogin.setText("a@b.c");
         jTextFieldEmailLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldEmailLoginActionPerformed(evt);
@@ -60,13 +69,12 @@ public class LoginDialog extends javax.swing.JDialog {
             }
         });
 
+        jPasswordFieldPasswordLogin.setText("string");
         jPasswordFieldPasswordLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordFieldPasswordLoginActionPerformed(evt);
             }
         });
-
-        jCheckBoxInstructor.setText("Assing Instructor");
 
         jLabel3.setText("Insert Email");
 
@@ -78,49 +86,33 @@ public class LoginDialog extends javax.swing.JDialog {
             jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLoginLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLoginLayout.createSequentialGroup()
-                        .addComponent(jCheckBoxInstructor)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelLoginLayout.createSequentialGroup()
-                        .addComponent(jPasswordFieldPasswordLogin)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLoginLayout.createSequentialGroup()
-                        .addComponent(jTextFieldEmailLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                        .addGap(234, 234, 234))
-                    .addGroup(jPanelLoginLayout.createSequentialGroup()
-                        .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addComponent(jLabel3))
             .addGroup(jPanelLoginLayout.createSequentialGroup()
-                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLoginLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabelMessageSuccess))
-                    .addGroup(jPanelLoginLayout.createSequentialGroup()
-                        .addGap(206, 206, 206)
-                        .addComponent(jButtonLogin)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jTextFieldEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelLoginLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel4))
+            .addGroup(jPanelLoginLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jPasswordFieldPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelLoginLayout.createSequentialGroup()
+                .addGap(206, 206, 206)
+                .addComponent(jButtonLogin))
         );
         jPanelLoginLayout.setVerticalGroup(
             jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLoginLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jTextFieldEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jPasswordFieldPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jCheckBoxInstructor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jButtonLogin)
-                .addGap(30, 30, 30)
-                .addComponent(jLabelMessageSuccess)
-                .addGap(19, 19, 19))
+                .addGap(58, 58, 58)
+                .addComponent(jButtonLogin))
         );
 
         jButtonLogout.setText("Logout");
@@ -134,28 +126,26 @@ public class LoginDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jButtonLogout)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128))
+                .addGap(6, 6, 6)
+                .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLogout))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(jButtonLogout)
+                    .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
-       setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jPasswordFieldPasswordLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordLoginActionPerformed
@@ -163,19 +153,24 @@ public class LoginDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jPasswordFieldPasswordLoginActionPerformed
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        DataAccess da= new DataAccess();
-        Usuari usuari= da.getUsuari(jTextFieldEmailLogin.getText());
-        if(usuari !=null){
-            char[] passordToVerify= jPasswordFieldPasswordLogin.getPassword();
-            String userPasswordHashInDB= usuari.getPasswordHash();
-            var result= BCrypt.verifyer().verify(passordToVerify,userPasswordHashInDB);
-            if(result.verified){
-                JOptionPane.showMessageDialog(this, "Login success. Welcome " + usuari.getNom()+ "!");
+        DataAccess da = new DataAccess();
+        Usuaris usuari = da.getUsuari(jTextFieldEmailLogin.getText());
+        if (usuari != null) {
+            char[] passordToVerify = jPasswordFieldPasswordLogin.getPassword();
+            String userPasswordHashInDB = usuari.getPasswordHash();
+            var result = BCrypt.verifyer().verify(passordToVerify, userPasswordHashInDB);
 
-            }else{
+            if (result.verified) {
+                JOptionPane.showMessageDialog(this, "Login success. Welcome " + usuari.getNom() + "!");
+                loggedUser = usuari; // Guardar el usuario logueado
+
+                // Mostrar el panel de usuarios en el JFrame principal
+                jFrame.showListUsers(); // Mostrar el panel de usuarios con el instructor
+                dispose(); // Cerrar el diálogo de login
+            } else {
                 JOptionPane.showMessageDialog(this, "Error: invalid password");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Error: user not found");
         }
     }//GEN-LAST:event_jButtonLoginActionPerformed
@@ -214,14 +209,9 @@ public class LoginDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LoginDialog dialog = new LoginDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                LoginDialog dialog = new LoginDialog(new javax.swing.JFrame(), true, new Main());
+                dialog.setLocationRelativeTo(null);  // Centrar el diálogo en la pantalla
+                dialog.setVisible(true);  // Mostrar el diálogo
             }
         });
     }
@@ -229,7 +219,6 @@ public class LoginDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonLogout;
-    private javax.swing.JCheckBox jCheckBoxInstructor;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelMessageSuccess;
