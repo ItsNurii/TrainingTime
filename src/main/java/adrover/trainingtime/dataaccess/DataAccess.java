@@ -4,7 +4,7 @@
  */
 package adrover.trainingtime.dataaccess;
 
-import adrover.trainingtime.dtos.Usuaris;
+import adrover.trainingtime.dtos.Usuari;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,8 +33,8 @@ public class DataAccess {
     }
 
     // Método actualizado para obtener los usuarios entrenados por un instructor
-    public ArrayList<Usuaris> getUsuarisByInstructor(int instructorId) {
-        ArrayList<Usuaris> usuaris = new ArrayList<>();
+    public ArrayList<Usuari> getUsuarisByInstructor(int instructorId) {
+        ArrayList<Usuari> usuaris = new ArrayList<>();
         String sql = "SELECT * FROM Usuaris WHERE Instructor = 1 AND InstructorId = ?";
 
         Connection connection = getConnection();
@@ -44,7 +44,7 @@ public class DataAccess {
             ResultSet resultSet = selectStatement.executeQuery();
 
             while (resultSet.next()) {
-                Usuaris user = new Usuaris();
+                Usuari user = new Usuari();
                 user.setId(resultSet.getInt("Id"));
                 user.setNom(resultSet.getString("Nom"));
                 user.setEmail(resultSet.getString("Email"));
@@ -62,8 +62,8 @@ public class DataAccess {
         return usuaris;
     }
 
-    public Usuaris getUsuari(String Email) {
-        Usuaris user = null;
+    public Usuari getUsuari(String Email) {
+        Usuari user = null;
         String sql = "SELECT * FROM Usuaris WHERE Email=?";
 
         Connection connection = getConnection();
@@ -72,7 +72,7 @@ public class DataAccess {
             selectStatement.setString(1, Email);
             ResultSet resultSet = selectStatement.executeQuery();
             while (resultSet.next()) {
-                user = new Usuaris();
+                user = new Usuari();
                 user.setId(resultSet.getInt("Id"));
                 user.setNom(resultSet.getString("Nom"));
                 user.setEmail(resultSet.getString("Email"));
@@ -90,7 +90,7 @@ public class DataAccess {
         return user;
     }
 
-    public int registerUser(Usuaris u) {
+    public int registerUser(Usuari u) {
         int newUserId = 0;
         Connection connection = getConnection();
         String sql = "INSERT INTO Usuaris(Nom, Email, PasswordHash, Instructor)" + "VALUES(?,?,?,?)";
@@ -113,8 +113,8 @@ public class DataAccess {
 
     }
 
-    public ArrayList<Usuaris> getUsuaris() {
-        ArrayList<Usuaris> usuaris = new ArrayList<>();
+    public ArrayList<Usuari> getUsuaris() {
+        ArrayList<Usuari> usuaris = new ArrayList<>();
         String sql = "SELECT * FROM Usuaris";
 
         Connection connection = getConnection();
@@ -122,7 +122,7 @@ public class DataAccess {
             PreparedStatement selectStatement = connection.prepareStatement(sql);
             ResultSet resultSet = selectStatement.executeQuery();
             while (resultSet.next()) {
-                Usuaris user = new Usuaris();
+                Usuari user = new Usuari();
                 user.setId(resultSet.getInt("Id"));
                 user.setNom(resultSet.getString("Nom"));
                 user.setEmail(resultSet.getString("Email"));

@@ -5,7 +5,7 @@
 package adrover.trainingtime;
 
 import adrover.trainingtime.dataaccess.DataAccess;
-import adrover.trainingtime.dtos.Usuaris;
+import adrover.trainingtime.dtos.Usuari;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import javax.swing.JOptionPane;
 
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class LoginDialog extends javax.swing.JDialog {
 
     private Main jFrame;
-    private Usuaris loggedUser;
+    private Usuari loggedUser;
 
     /**
      * Creates new form LoginDialog
@@ -27,7 +27,7 @@ public class LoginDialog extends javax.swing.JDialog {
         this.jFrame = (Main) mainFrame; // Asignar la referencia de Main
     }
 
-    public Usuaris getloggedUser() {
+    public Usuari getloggedUser() {
         return this.loggedUser;
     }
 
@@ -50,7 +50,6 @@ public class LoginDialog extends javax.swing.JDialog {
         jButtonLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jPanelLogin.setBorder(javax.swing.BorderFactory.createTitledBorder("Login"));
@@ -62,7 +61,7 @@ public class LoginDialog extends javax.swing.JDialog {
             }
         });
 
-        jButtonLogin.setText("Register");
+        jButtonLogin.setText("Login");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLoginActionPerformed(evt);
@@ -130,7 +129,8 @@ public class LoginDialog extends javax.swing.JDialog {
                 .addGap(14, 14, 14)
                 .addComponent(jButtonLogout)
                 .addGap(6, 6, 6)
-                .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +138,8 @@ public class LoginDialog extends javax.swing.JDialog {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonLogout)
-                    .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -154,7 +155,7 @@ public class LoginDialog extends javax.swing.JDialog {
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         DataAccess da = new DataAccess();
-        Usuaris usuari = da.getUsuari(jTextFieldEmailLogin.getText());
+        Usuari usuari = da.getUsuari(jTextFieldEmailLogin.getText());
         if (usuari != null) {
             char[] passordToVerify = jPasswordFieldPasswordLogin.getPassword();
             String userPasswordHashInDB = usuari.getPasswordHash();

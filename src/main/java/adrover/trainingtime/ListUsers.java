@@ -5,7 +5,7 @@
 package adrover.trainingtime;
 
 import adrover.trainingtime.dataaccess.DataAccess;
-import adrover.trainingtime.dtos.Usuaris;
+import adrover.trainingtime.dtos.Usuari;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
@@ -18,16 +18,17 @@ public class ListUsers extends javax.swing.JPanel {
 
     private Main jFrameMain;
     private DataAccess da = new DataAccess();
-    private Usuaris instructor;
+    private Usuari instructor;
 
     /**
      * Creates new form ListUsuaris
      */
-    public ListUsers(Main jFrameMain, Usuaris instructor1) {
+    public ListUsers(Main jFrameMain, Usuari instructor ) {
+        initComponents();
         this.jFrameMain = jFrameMain;
         this.instructor = instructor;
         this.da = new DataAccess();
-        this.setSize(600, 400);
+        this.setSize(800, 600);
         this.setLayout(null);
 
     }
@@ -124,7 +125,7 @@ public class ListUsers extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelWorkoutsLayout.createSequentialGroup()
                 .addGroup(jPanelWorkoutsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelWorkoutsLayout.createSequentialGroup()
-                        .addContainerGap(18, Short.MAX_VALUE)
+                        .addContainerGap(16, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelWorkoutsLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
@@ -145,7 +146,7 @@ public class ListUsers extends javax.swing.JPanel {
                     .addComponent(jButtonWorkouts))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -153,35 +154,31 @@ public class ListUsers extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(43, 43, 43)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
+                .addGap(47, 47, 47)
                 .addComponent(jPanelWorkouts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanelWorkouts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanelWorkouts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setUsuari(Usuaris usuari) {
-        this.instructor = usuari;
-
-    }
     private void jButtonUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsersActionPerformed
         // Obtener el ID del instructor logueado
         int instructorId = instructor.getId();
-        ArrayList<Usuaris> usuaris = da.getUsuaris();
+        ArrayList<Usuari> usuaris = da.getUsuaris();
         DefaultListModel<String> listaUsuaris = new DefaultListModel<>();
 
         // Filtrar usuarios para mostrar solo los entrenados por el instructor actual
-        for (Usuaris u : usuaris) {
+        for (Usuari u : usuaris) {
             listaUsuaris.addElement(u.toString());
         }
         jListUsers.setModel(listaUsuaris);
@@ -201,8 +198,8 @@ public class ListUsers extends javax.swing.JPanel {
 
         // Check if a user is selected
         if (selectedUserName != null) {
-            // Find the Usuaris object corresponding to the selected user
-            Usuaris selectedUser = instructor.getUserByName(selectedUserName); // Assuming method exists
+            // Find the Usuari object corresponding to the selected user
+            Usuari selectedUser = instructor.getUserByName(selectedUserName); // Assuming method exists
 
             // Open the CreateWorkoutDialog to add a workout for the selected user
             if (selectedUser != null) {
@@ -217,7 +214,7 @@ public class ListUsers extends javax.swing.JPanel {
         }
         
 
-    private void updateWorkoutsList(Usuaris selectedUser) {
+    private void updateWorkoutsList(Usuari selectedUser) {
         ArrayList<String> workouts = selectedUser.getWorkouts(); // Assuming getWorkouts() returns the list of workouts
         DefaultListModel<String> workoutsListModel = new DefaultListModel<>();
 

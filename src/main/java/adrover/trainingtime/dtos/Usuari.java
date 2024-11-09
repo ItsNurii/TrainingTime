@@ -8,7 +8,7 @@ package adrover.trainingtime.dtos;
  *
  * @author nuria
  */
-public class Usuaris {
+public class Usuari {
     private int id;
     private String nom;
     private String email;
