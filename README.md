@@ -1,3 +1,4 @@
 # TrainingTime
 
-![TrainingTime planing Def](https://github.com/user-attachments/assets/69bdca80-8875-4e36-b78e-882bd07b14c0)
+![TrainingTime planing (2)](https://github.com/user-attachments/assets/ea8a6740-11ee-488c-8890-103aebdb2db8)
+
