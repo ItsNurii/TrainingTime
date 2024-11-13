@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package adrover.trainingtime;
+package adrover.trainingtime.views;
 
-import adrover.trainingtime.dtos.Usuari;
-import adrover.trainingtime.LoginDialog;
+import adrover.trainingtime.Main;
+import adrover.trainingtime.views.LoginDialog;
 import java.awt.Desktop;
 import java.net.URI;
 import javax.swing.JOptionPane;
@@ -22,8 +22,9 @@ public class MainJPanel extends javax.swing.JPanel {
      */
     public MainJPanel(Main mainJFrame) {
         initComponents();
-        this.setSize(800,800);
+        this.setSize(800,600);
         main= mainJFrame;
+        
         
     }
 
@@ -41,6 +42,7 @@ public class MainJPanel extends javax.swing.JPanel {
         jButtonAccess = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 204, 153));
+        setMinimumSize(new java.awt.Dimension(800, 600));
         setLayout(null);
 
         jLabelWeb.setForeground(new java.awt.Color(0, 0, 0));
@@ -51,7 +53,7 @@ public class MainJPanel extends javax.swing.JPanel {
             }
         });
         add(jLabelWeb);
-        jLabelWeb.setBounds(240, 490, 220, 16);
+        jLabelWeb.setBounds(290, 490, 220, 16);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/TrainingTime logo (1).png"))); // NOI18N
         jLabel1.setText("Logo");
@@ -59,7 +61,7 @@ public class MainJPanel extends javax.swing.JPanel {
         jLabel1.setMinimumSize(new java.awt.Dimension(120, 120));
         jLabel1.setPreferredSize(new java.awt.Dimension(120, 120));
         add(jLabel1);
-        jLabel1.setBounds(180, 30, 329, 331);
+        jLabel1.setBounds(230, 30, 329, 331);
 
         jButtonAccess.setText("Access");
         jButtonAccess.addActionListener(new java.awt.event.ActionListener() {
@@ -68,7 +70,7 @@ public class MainJPanel extends javax.swing.JPanel {
             }
         });
         add(jButtonAccess);
-        jButtonAccess.setBounds(290, 410, 115, 39);
+        jButtonAccess.setBounds(340, 410, 115, 39);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelWebMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelWebMouseClicked

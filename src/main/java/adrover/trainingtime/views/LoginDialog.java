@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package adrover.trainingtime;
+package adrover.trainingtime.views;
 
+import adrover.trainingtime.Main;
 import adrover.trainingtime.dataaccess.DataAccess;
 import adrover.trainingtime.dtos.Usuari;
 import at.favre.lib.crypto.bcrypt.BCrypt;
@@ -24,7 +25,11 @@ public class LoginDialog extends javax.swing.JDialog {
     public LoginDialog(java.awt.Frame parent, boolean modal, Main mainFrame) {
         super(parent, modal);
         initComponents();
+        this.setSize(800, 400);
+        this.setBounds(0, 0, 800, 400);
         this.jFrame = (Main) mainFrame; // Asignar la referencia de Main
+        setLocationRelativeTo(this);
+       
     }
 
     public Usuari getloggedUser() {
@@ -40,6 +45,8 @@ public class LoginDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
+        jPanel1 = new javax.swing.JPanel();
         jPanelLogin = new javax.swing.JPanel();
         jTextFieldEmailLogin = new javax.swing.JTextField();
         jButtonLogin = new javax.swing.JButton();
@@ -50,9 +57,20 @@ public class LoginDialog extends javax.swing.JDialog {
         jButtonLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 204, 153));
+        setBounds(new java.awt.Rectangle(0, 0, 500, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
+        getContentPane().setLayout(null);
 
-        jPanelLogin.setBorder(javax.swing.BorderFactory.createTitledBorder("Login"));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel1.setMinimumSize(new java.awt.Dimension(780, 400));
+        jPanel1.setLayout(null);
+
+        jPanelLogin.setBackground(new java.awt.Color(255, 255, 204));
+        jPanelLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOGIN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanelLogin.setMinimumSize(new java.awt.Dimension(580, 310));
+        jPanelLogin.setLayout(null);
 
         jTextFieldEmailLogin.setText("a@b.c");
         jTextFieldEmailLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +78,8 @@ public class LoginDialog extends javax.swing.JDialog {
                 jTextFieldEmailLoginActionPerformed(evt);
             }
         });
+        jPanelLogin.add(jTextFieldEmailLogin);
+        jTextFieldEmailLogin.setBounds(32, 71, 286, 33);
 
         jButtonLogin.setText("Login");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +87,8 @@ public class LoginDialog extends javax.swing.JDialog {
                 jButtonLoginActionPerformed(evt);
             }
         });
+        jPanelLogin.add(jButtonLogin);
+        jButtonLogin.setBounds(250, 240, 72, 23);
 
         jPasswordFieldPasswordLogin.setText("string");
         jPasswordFieldPasswordLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -74,45 +96,21 @@ public class LoginDialog extends javax.swing.JDialog {
                 jPasswordFieldPasswordLoginActionPerformed(evt);
             }
         });
+        jPanelLogin.add(jPasswordFieldPasswordLogin);
+        jPasswordFieldPasswordLogin.setBounds(32, 156, 290, 33);
+        jPanelLogin.add(jLabelMessageSuccess);
+        jLabelMessageSuccess.setBounds(0, 0, 0, 0);
 
         jLabel3.setText("Insert Email");
+        jPanelLogin.add(jLabel3);
+        jLabel3.setBounds(32, 43, 280, 16);
 
         jLabel4.setText("Insert Password");
+        jPanelLogin.add(jLabel4);
+        jLabel4.setBounds(32, 122, 290, 16);
 
-        javax.swing.GroupLayout jPanelLoginLayout = new javax.swing.GroupLayout(jPanelLogin);
-        jPanelLogin.setLayout(jPanelLoginLayout);
-        jPanelLoginLayout.setHorizontalGroup(
-            jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLoginLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel3))
-            .addGroup(jPanelLoginLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jTextFieldEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanelLoginLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel4))
-            .addGroup(jPanelLoginLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jPasswordFieldPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanelLoginLayout.createSequentialGroup()
-                .addGap(206, 206, 206)
-                .addComponent(jButtonLogin))
-        );
-        jPanelLoginLayout.setVerticalGroup(
-            jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLoginLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel3)
-                .addGap(12, 12, 12)
-                .addComponent(jTextFieldEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jPasswordFieldPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(jButtonLogin))
-        );
+        jPanel1.add(jPanelLogin);
+        jPanelLogin.setBounds(120, 140, 580, 310);
 
         jButtonLogout.setText("Logout");
         jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -120,27 +118,11 @@ public class LoginDialog extends javax.swing.JDialog {
                 jButtonLogoutActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonLogout);
+        jButtonLogout.setBounds(10, 20, 72, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jButtonLogout)
-                .addGap(6, 6, 6)
-                .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonLogout)
-                    .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 810, 610);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,7 +148,7 @@ public class LoginDialog extends javax.swing.JDialog {
                 loggedUser = usuari; // Guardar el usuario logueado
 
                 // Mostrar el panel de usuarios en el JFrame principal
-                jFrame.showListUsers(); // Mostrar el panel de usuarios con el instructor
+                jFrame.showListUsers(loggedUser); // Mostrar el panel de usuarios con el instructor
                 dispose(); // Cerrar el diálogo de login
             } else {
                 JOptionPane.showMessageDialog(this, "Error: invalid password");
@@ -183,46 +165,16 @@ public class LoginDialog extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                LoginDialog dialog = new LoginDialog(new javax.swing.JFrame(), true, new Main());
-                dialog.setLocationRelativeTo(null);  // Centrar el diálogo en la pantalla
-                dialog.setVisible(true);  // Mostrar el diálogo
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelMessageSuccess;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JPasswordField jPasswordFieldPasswordLogin;
     private javax.swing.JTextField jTextFieldEmailLogin;

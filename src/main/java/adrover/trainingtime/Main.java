@@ -4,11 +4,10 @@
  */
 package adrover.trainingtime;
 
+import adrover.trainingtime.views.MainJPanel;
+import adrover.trainingtime.views.ListUsers;
 import adrover.trainingtime.dtos.Usuari;
-import java.awt.Desktop;
-import java.net.URI;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -31,13 +30,15 @@ public class Main extends javax.swing.JFrame {
         pnlMain.setBounds(0, 0, 800, 600);
         getContentPane().add(pnlMain);
         repaint(); 
+        setLocationRelativeTo(this);
     }
 
-    public void showListUsers() {
+    public void showListUsers(Usuari u) {
+        this.instructor=u;
         getContentPane().removeAll();
         // Crear el panel ListUsers y pasarlo al marco
         userList = new ListUsers(this, instructor);
-        userList.setBounds(0, 0, 600, 400); // Definir las posiciones y tamaños manualmente
+        userList.setBounds(0, 0, 800, 600); // Definir las posiciones y tamaños manualmente
         // Agregar el panel de usuarios
         getContentPane().add(userList);
         userList.revalidate();
@@ -53,8 +54,10 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItemLogout = new javax.swing.JMenuItem();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemAbout = new javax.swing.JMenuItem();
@@ -65,6 +68,14 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jMenu1.setText("File");
+
+        jMenuItemLogout.setText("Logout");
+        jMenuItemLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLogoutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemLogout);
 
         jMenuItemExit.setText("Exit");
         jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
@@ -95,10 +106,13 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
+    private void jMenuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLogoutActionPerformed
 
-        System.exit(0); // Exit the application
-    }//GEN-LAST:event_jMenuItemExitActionPerformed
+        getContentPane().add(pnlMain);
+        pnlMain.setVisible(true);
+        userList.setVisible(false);
+        JOptionPane.showMessageDialog(this, "Logout correctly", "Logout", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jMenuItemLogoutActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         JOptionPane.showMessageDialog(this,
@@ -106,8 +120,12 @@ public class Main extends javax.swing.JFrame {
                 + "Course: 2º DAM \n"
                 + "Resources used:\n"
                 + "- Logo: Krea IA\n"
-                + "- Other resources: Teatcher, classmates, ChatGPT");
+                + "- Other resources: Teacher, Classmates, ChatGPT");
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
+
+    private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
+        System.exit(0); // Exit the application
+    }//GEN-LAST:event_jMenuItemExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,10 +163,12 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemExit;
+    private javax.swing.JMenuItem jMenuItemLogout;
     // End of variables declaration//GEN-END:variables
 }

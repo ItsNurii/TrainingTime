@@ -9,17 +9,14 @@ package adrover.trainingtime.dtos;
  * @author nuria
  */
 public class Usuari {
+
     private int id;
     private String nom;
     private String email;
     private String passwordHash;
     private byte[] foto;
     private boolean instructor;
-    
-    @Override
-    public String toString(){
-        return id + " " + nom + " " + email;
-    }
+
     
     public int getId() {
         return id;
@@ -68,6 +65,9 @@ public class Usuari {
     public void setInstructor(boolean instructor) {
         this.instructor = instructor;
     }
-  
-    
+
+    @Override
+    public String toString() {
+        return nom;
+    }
 }
