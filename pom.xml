@@ -23,7 +23,22 @@
             <artifactId>bcrypt</artifactId>
             <version>0.10.2</version>
         </dependency>
-
+       
+        <dependency>
+            <groupId>adrover</groupId>
+            <artifactId>jPanelImage</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>adrover</groupId>
+            <artifactId>CompoCalendar</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>mosqueira</groupId>
+            <artifactId>ComponenteCalendar</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 

@@ -31,12 +31,14 @@ public class ListUsers extends javax.swing.JPanel {
     private ArrayList<Workouts> listaWorkouts;
     private ArrayList<Exercise> listaExercise;
     private Usuari usuariSelected;
+    private DefaultListModel<String> listModel;
 
     /**
      * Creates new form ListUsuaris
      */
     public ListUsers(Main jFrameMain, Usuari instructor) {
         initComponents();
+        setBackground(new java.awt.Color(173, 216, 230)); // Azul claro
         this.setSize(800, 600);
         this.jFrameMain = jFrameMain;
         this.instructor = instructor;
@@ -101,6 +103,8 @@ public class ListUsers extends javax.swing.JPanel {
         jButtonModifyExercise = new javax.swing.JButton();
         jButtonDeleteExercise = new javax.swing.JButton();
         jButtonAddExToWork = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        compoCalendar1 = new adrover.compocalendar.CompoCalendar();
 
         jDialogWorkouts.setMinimumSize(new java.awt.Dimension(400, 300));
         jDialogWorkouts.getContentPane().setLayout(null);
@@ -277,7 +281,7 @@ public class ListUsers extends javax.swing.JPanel {
         jPanelComments3.setBounds(50, 140, 320, 50);
 
         setBackground(new java.awt.Color(255, 204, 153));
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(820, 600));
         setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
@@ -306,7 +310,7 @@ public class ListUsers extends javax.swing.JPanel {
         jScrollPane2.setBounds(20, 50, 110, 160);
 
         add(jPanel2);
-        jPanel2.setBounds(10, 10, 150, 260);
+        jPanel2.setBounds(10, 10, 150, 230);
 
         jPanelWorkouts.setBackground(new java.awt.Color(255, 255, 204));
         jPanelWorkouts.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "WORKOUTS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -332,7 +336,7 @@ public class ListUsers extends javax.swing.JPanel {
         jScrollPane3.setViewportView(jTableWorkouts);
 
         jPanelWorkouts.add(jScrollPane3);
-        jScrollPane3.setBounds(10, 50, 300, 210);
+        jScrollPane3.setBounds(10, 50, 300, 160);
 
         jButtonCreateWorkout.setText("Create Workout");
         jButtonCreateWorkout.addActionListener(new java.awt.event.ActionListener() {
@@ -344,24 +348,19 @@ public class ListUsers extends javax.swing.JPanel {
         jButtonCreateWorkout.setBounds(10, 20, 113, 23);
 
         add(jPanelWorkouts);
-        jPanelWorkouts.setBounds(170, 10, 320, 280);
+        jPanelWorkouts.setBounds(170, 10, 320, 230);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "EXERCISES from WORKOUTS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
         jPanel1.setLayout(null);
 
-        jListExercises.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListExercisesMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jListExercises);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(30, 20, 230, 160);
 
         add(jPanel1);
-        jPanel1.setBounds(500, 80, 280, 190);
+        jPanel1.setBounds(500, 40, 280, 190);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "EXERCISES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -386,7 +385,7 @@ public class ListUsers extends javax.swing.JPanel {
         jScrollPane4.setViewportView(jTableExercises);
 
         jPanel3.add(jScrollPane4);
-        jScrollPane4.setBounds(10, 20, 220, 170);
+        jScrollPane4.setBounds(20, 80, 220, 170);
 
         jButtonShowExercises.setText("Show Exercises");
         jButtonShowExercises.addActionListener(new java.awt.event.ActionListener() {
@@ -395,7 +394,7 @@ public class ListUsers extends javax.swing.JPanel {
             }
         });
         jPanel3.add(jButtonShowExercises);
-        jButtonShowExercises.setBounds(240, 40, 120, 23);
+        jButtonShowExercises.setBounds(10, 20, 120, 23);
 
         jButtonCreateExercise.setText("Create Exercise");
         jButtonCreateExercise.addActionListener(new java.awt.event.ActionListener() {
@@ -404,7 +403,7 @@ public class ListUsers extends javax.swing.JPanel {
             }
         });
         jPanel3.add(jButtonCreateExercise);
-        jButtonCreateExercise.setBounds(240, 80, 120, 23);
+        jButtonCreateExercise.setBounds(10, 50, 120, 23);
 
         jButtonModifyExercise.setText("Modify Exercise");
         jButtonModifyExercise.addActionListener(new java.awt.event.ActionListener() {
@@ -413,7 +412,7 @@ public class ListUsers extends javax.swing.JPanel {
             }
         });
         jPanel3.add(jButtonModifyExercise);
-        jButtonModifyExercise.setBounds(240, 120, 120, 23);
+        jButtonModifyExercise.setBounds(140, 20, 120, 23);
 
         jButtonDeleteExercise.setText("Delete Exercise");
         jButtonDeleteExercise.addActionListener(new java.awt.event.ActionListener() {
@@ -422,10 +421,10 @@ public class ListUsers extends javax.swing.JPanel {
             }
         });
         jPanel3.add(jButtonDeleteExercise);
-        jButtonDeleteExercise.setBounds(240, 160, 120, 23);
+        jButtonDeleteExercise.setBounds(140, 50, 120, 23);
 
         add(jPanel3);
-        jPanel3.setBounds(170, 300, 380, 200);
+        jPanel3.setBounds(30, 250, 270, 270);
 
         jButtonAddExToWork.setText("Add exercise to workout");
         jButtonAddExToWork.addActionListener(new java.awt.event.ActionListener() {
@@ -434,7 +433,17 @@ public class ListUsers extends javax.swing.JPanel {
             }
         });
         add(jButtonAddExToWork);
-        jButtonAddExToWork.setBounds(560, 30, 170, 23);
+        jButtonAddExToWork.setBounds(550, 10, 170, 23);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CALENDAR", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel4.setForeground(new java.awt.Color(255, 255, 204));
+        jPanel4.setLayout(null);
+        jPanel4.add(compoCalendar1);
+        compoCalendar1.setBounds(10, 20, 430, 250);
+
+        add(jPanel4);
+        jPanel4.setBounds(320, 250, 450, 280);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsersActionPerformed
@@ -546,6 +555,7 @@ public class ListUsers extends javax.swing.JPanel {
             listModel.addElement(ex.getNomExercici() + " " + ex.getDescripcio());
         }
         jListExercises.setModel(listModel);
+
     }
 
     private void jTableWorkoutsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableWorkoutsMouseClicked
@@ -712,10 +722,6 @@ public class ListUsers extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldModificationDescriptionActionPerformed
 
-    private void jListExercisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListExercisesMouseClicked
-
-    }//GEN-LAST:event_jListExercisesMouseClicked
-
     private void jButtonDeleteExerciseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteExerciseActionPerformed
         int selectedRow = jTableExercises.getSelectedRow();
         if (selectedRow != -1) {
@@ -821,6 +827,7 @@ public class ListUsers extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private adrover.compocalendar.CompoCalendar compoCalendar1;
     private javax.swing.JButton jButtonAddExToWork;
     private javax.swing.JButton jButtonAddExercise;
     private javax.swing.JButton jButtonAddModification;
@@ -850,6 +857,7 @@ public class ListUsers extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelComments;
     private javax.swing.JPanel jPanelComments2;
     private javax.swing.JPanel jPanelComments3;

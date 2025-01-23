@@ -8,6 +8,7 @@ import adrover.trainingtime.Main;
 import adrover.trainingtime.dataaccess.DataAccess;
 import adrover.trainingtime.dtos.Usuari;
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,11 +26,18 @@ public class LoginDialog extends javax.swing.JDialog {
     public LoginDialog(java.awt.Frame parent, boolean modal, Main mainFrame) {
         super(parent, modal);
         initComponents();
+        // Cambiar el fondo del panel que contiene el login
+        jPanel1.setBackground(new Color(173, 216, 230));  // Fondo azul claro
+
+        // Si quieres cambiar el color de fondo de jPanelLogin también:
+        jPanelLogin.setBackground(Color.WHITE); // Fondo azul claro
         this.setSize(800, 400);
         this.setBounds(0, 0, 800, 400);
         this.jFrame = (Main) mainFrame; // Asignar la referencia de Main
         setLocationRelativeTo(this);
-       
+        jLabel3.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 14));
+        jLabel4.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 14));
+        jButtonLogin.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 14));
     }
 
     public Usuari getloggedUser() {
@@ -54,7 +62,6 @@ public class LoginDialog extends javax.swing.JDialog {
         jLabelMessageSuccess = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButtonLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 153));
@@ -112,27 +119,14 @@ public class LoginDialog extends javax.swing.JDialog {
         jPanel1.add(jPanelLogin);
         jPanelLogin.setBounds(120, 140, 580, 310);
 
-        jButtonLogout.setText("Logout");
-        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLogoutActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonLogout);
-        jButtonLogout.setBounds(10, 20, 72, 23);
-
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 810, 610);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
-        setVisible(false);
-    }//GEN-LAST:event_jButtonLogoutActionPerformed
-
     private void jPasswordFieldPasswordLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordLoginActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jPasswordFieldPasswordLoginActionPerformed
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
@@ -165,11 +159,9 @@ public class LoginDialog extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
-    private javax.swing.JButton jButtonLogout;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

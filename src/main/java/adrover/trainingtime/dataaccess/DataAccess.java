@@ -31,7 +31,6 @@ public class DataAccess {
         } catch (SQLException ex) {
             Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return connection;
     }
 
@@ -50,7 +49,7 @@ public class DataAccess {
                 user.setNom(resultSet.getString("Nom"));
                 user.setEmail(resultSet.getString("Email"));
                 user.setPasswordHash(resultSet.getString("PasswordHash"));
-                //user.setFoto(resultSet.getBytes("Foto"));
+                user.setFoto(resultSet.getBytes("Foto"));
                 user.setInstructor(resultSet.getBoolean("Instructor"));
             }
 
@@ -128,7 +127,7 @@ public class DataAccess {
                 user.setNom(resultSet.getString("Nom"));
                 user.setEmail(resultSet.getString("Email"));
                 user.setPasswordHash(resultSet.getString("PasswordHash"));
-                //user.setFoto(resultSet.getBytes("Foto"));
+                user.setFoto(resultSet.getBytes("Foto"));
                 user.setInstructor(resultSet.getBoolean("Instructor"));
                 usuaris.add(user);  // Añadir el usuario a la lista
             }
@@ -325,5 +324,4 @@ public class DataAccess {
         }
         return false;
     }
-
 }

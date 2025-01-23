@@ -6,6 +6,7 @@ package adrover.trainingtime.views;
 
 import adrover.trainingtime.Main;
 import adrover.trainingtime.views.LoginDialog;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.net.URI;
 import javax.swing.JOptionPane;
@@ -16,16 +17,37 @@ import javax.swing.JOptionPane;
  */
 public class MainJPanel extends javax.swing.JPanel {
 
-    private Main main= null;
+    private Main main = null;
+
     /**
      * Creates new form MainJPanel
      */
     public MainJPanel(Main mainJFrame) {
         initComponents();
-        this.setSize(800,600);
-        main= mainJFrame;
-        
-        
+        this.setSize(800, 600);
+        main = mainJFrame;
+        applyCustomStyles();
+    }
+
+    private void applyCustomStyles() {
+        // Cambiar el fondo del JPanel principal a un color azul claro
+        this.setBackground(new Color(173, 216, 230)); // Azul claro
+
+        // Cambiar el color del botón de acceso
+        jButtonAccess.setBackground(new Color(33, 150, 243)); // Color azul
+        jButtonAccess.setForeground(Color.WHITE); // Texto blanco para el botón
+        jButtonAccess.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 14));
+
+        // Establecer borde y estilo del botón
+        jButtonAccess.setBorderPainted(false);
+        jButtonAccess.setFocusPainted(false);
+        jButtonAccess.setContentAreaFilled(true);
+        jButtonAccess.setOpaque(true);
+
+        // Cambiar el color de texto del enlace web
+        jLabelWeb.setForeground(new Color(0, 51, 204)); // Azul para el texto del enlace
+
+       
     }
 
     /**

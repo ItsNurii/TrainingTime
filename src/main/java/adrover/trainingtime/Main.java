@@ -38,7 +38,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().removeAll();
         // Crear el panel ListUsers y pasarlo al marco
         userList = new ListUsers(this, instructor);
-        userList.setBounds(0, 0, 800, 600); // Definir las posiciones y tamaños manualmente
+        userList.setBounds(0, 0, 1100, 600); // Definir las posiciones y tamaños manualmente
         // Agregar el panel de usuarios
         getContentPane().add(userList);
         userList.revalidate();
