@@ -30,7 +30,7 @@ public class LoginDialog extends javax.swing.JDialog {
         jPanel1.setBackground(new Color(173, 216, 230));  // Fondo azul claro
 
         // Si quieres cambiar el color de fondo de jPanelLogin también:
-        jPanelLogin.setBackground(Color.WHITE); // Fondo azul claro
+        jPanelLogin.setBackground(Color.WHITE); 
         this.setSize(800, 400);
         this.setBounds(0, 0, 800, 400);
         this.jFrame = (Main) mainFrame; // Asignar la referencia de Main

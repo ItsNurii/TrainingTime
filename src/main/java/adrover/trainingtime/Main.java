@@ -7,6 +7,7 @@ package adrover.trainingtime;
 import adrover.trainingtime.views.MainJPanel;
 import adrover.trainingtime.views.ListUsers;
 import adrover.trainingtime.dtos.Usuari;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,12 +30,12 @@ public class Main extends javax.swing.JFrame {
         pnlMain = new MainJPanel(this);
         pnlMain.setBounds(0, 0, 800, 600);
         getContentPane().add(pnlMain);
-        repaint(); 
+        repaint();
         setLocationRelativeTo(this);
     }
 
     public void showListUsers(Usuari u) {
-        this.instructor=u;
+        this.instructor = u;
         getContentPane().removeAll();
         // Crear el panel ListUsers y pasarlo al marco
         userList = new ListUsers(this, instructor);
@@ -56,7 +57,7 @@ public class Main extends javax.swing.JFrame {
 
         jDialog1 = new javax.swing.JDialog();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuFile = new javax.swing.JMenu();
         jMenuItemLogout = new javax.swing.JMenuItem();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
@@ -67,7 +68,7 @@ public class Main extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(null);
 
-        jMenu1.setText("File");
+        jMenuFile.setText("File");
 
         jMenuItemLogout.setText("Logout");
         jMenuItemLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +76,7 @@ public class Main extends javax.swing.JFrame {
                 jMenuItemLogoutActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemLogout);
+        jMenuFile.add(jMenuItemLogout);
 
         jMenuItemExit.setText("Exit");
         jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +84,7 @@ public class Main extends javax.swing.JFrame {
                 jMenuItemExitActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemExit);
+        jMenuFile.add(jMenuItemExit);
 
         jMenuHelp.setText("Help");
 
@@ -95,9 +96,9 @@ public class Main extends javax.swing.JFrame {
         });
         jMenuHelp.add(jMenuItemAbout);
 
-        jMenu1.add(jMenuHelp);
+        jMenuFile.add(jMenuHelp);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuFile);
 
         setJMenuBar(jMenuBar1);
 
@@ -127,6 +128,7 @@ public class Main extends javax.swing.JFrame {
         System.exit(0); // Exit the application
     }//GEN-LAST:event_jMenuItemExitActionPerformed
 
+   
     /**
      * @param args the command line arguments
      */
@@ -164,8 +166,8 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog jDialog1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemExit;
